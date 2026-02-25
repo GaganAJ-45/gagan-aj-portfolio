@@ -7,13 +7,12 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 3000,
     strictPort: true,
-    allowedHosts: [
-      'gagan-analytics.cluster-0.preview.emergentcf.cloud',
-      '.preview.emergentcf.cloud',
-      '.emergentagent.com',
-      'localhost',
-      '127.0.0.1',
-    ],
+    hmr: {
+      protocol: 'wss',
+      host: 'gagan-analytics.cluster-0.preview.emergentcf.cloud',
+      port: 443,
+    },
+    proxy: {},
   },
   preview: {
     host: '0.0.0.0',
