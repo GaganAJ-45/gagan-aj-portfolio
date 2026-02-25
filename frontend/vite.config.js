@@ -12,12 +12,7 @@ export default defineConfig({
       '.preview.emergentcf.cloud',
       '.emergentagent.com',
     ],
-    hmr: {
-      protocol: 'wss',
-      host: 'gagan-analytics.cluster-0.preview.emergentcf.cloud',
-      port: 443,
-    },
-    proxy: {},
+    hmr: false, // Disable HMR to prevent WebSocket connection issues
   },
   preview: {
     host: '0.0.0.0',
