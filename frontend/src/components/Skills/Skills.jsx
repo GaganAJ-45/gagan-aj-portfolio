@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaPython, FaDatabase, FaChartBar, FaCloud, FaComments } from 'react-icons/fa';
-import { SiPowerbi, SiPostgresql, SiMysql, SiMicrosoftexcel, SiAmazonaws, SiMicrosoftazure, SiGooglecloud } from 'react-icons/si';
+import { FaPython, FaDatabase, FaChartBar, FaCloud, FaComments, FaFileExcel } from 'react-icons/fa';
+import { SiPowerbi, SiPostgresql, SiMysql, SiAmazonaws, SiMicrosoftazure, SiGooglecloud } from 'react-icons/si';
 
 const Skills = () => {
   const [ref, inView] = useInView({
@@ -28,7 +28,7 @@ const Skills = () => {
     },
     {
       title: 'Data Tools',
-      icon: <SiMicrosoftexcel />,
+      icon: <FaFileExcel />,
       skills: ['Excel', 'Power Query', 'Power Pivot', 'DAX'],
     },
     {
