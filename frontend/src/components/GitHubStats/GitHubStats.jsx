@@ -38,9 +38,14 @@ const GitHubStats = () => {
               className="glass-strong p-4 rounded-2xl hover:neon-glow-blue transition-all duration-300"
             >
               <img
-                src={`https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bfff&icon_color=7c3aed&text_color=ffffff`}
+                src={`https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bfff&icon_color=7c3aed&text_color=ffffff&cache_seconds=86400`}
                 alt="GitHub Stats"
                 className="w-full h-auto rounded-lg"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = '<div class="text-center text-gray-400 py-8">Stats temporarily unavailable</div>';
+                }}
               />
             </motion.div>
 
@@ -52,9 +57,14 @@ const GitHubStats = () => {
               className="glass-strong p-4 rounded-2xl hover:neon-glow-purple transition-all duration-300"
             >
               <img
-                src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bfff&text_color=ffffff`}
+                src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bfff&text_color=ffffff&cache_seconds=86400`}
                 alt="Top Languages"
                 className="w-full h-auto rounded-lg"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = '<div class="text-center text-gray-400 py-8">Stats temporarily unavailable</div>';
+                }}
               />
             </motion.div>
 
@@ -66,9 +76,14 @@ const GitHubStats = () => {
               className="glass-strong p-4 rounded-2xl hover:neon-glow-blue transition-all duration-300"
             >
               <img
-                src={`https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=tokyonight&hide_border=true&background=0d1117&ring=00bfff&fire=7c3aed&currStreakLabel=00bfff`}
+                src={`https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=tokyonight&hide_border=true&background=0d1117&ring=00bfff&fire=7c3aed&currStreakLabel=00bfff&cache_seconds=86400`}
                 alt="GitHub Streak"
                 className="w-full h-auto rounded-lg"
+                loading="lazy"
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.parentElement.innerHTML = '<div class="text-center text-gray-400 py-8">Stats temporarily unavailable</div>';
+                }}
               />
             </motion.div>
           </div>
