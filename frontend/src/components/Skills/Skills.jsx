@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaPython, FaDatabase, FaChartBar, FaCloud, FaComments, FaFileExcel } from 'react-icons/fa';
-import { SiPowerbi, SiPostgresql, SiMysql, SiAmazonaws, SiMicrosoftazure, SiGooglecloud } from 'react-icons/si';
+import { FaPython, FaDatabase, FaChartBar, FaCloud, FaComments, FaFileExcel, FaAws } from 'react-icons/fa';
+import { SiMysql, SiPostgresql } from 'react-icons/si';
 
 const Skills = () => {
   const [ref, inView] = useInView({
