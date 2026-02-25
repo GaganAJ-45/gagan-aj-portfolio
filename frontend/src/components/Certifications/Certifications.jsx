@@ -26,7 +26,7 @@ const Certifications = () => {
       date: 'September 16, 2025',
       duration: '12.5 hours',
       link: 'https://ude.my/UC-5b89b888-3c52-4d18-a061-09d61a0003a5',
-      pdfLink: null, // Placeholder
+      pdfLink: '/assets/SQL_Certificate.pdf',
     },
   ];
 
