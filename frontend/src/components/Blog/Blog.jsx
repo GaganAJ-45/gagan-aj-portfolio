@@ -4,90 +4,70 @@ import { useInView } from 'react-intersection-observer';
 import { FaArrowRight } from 'react-icons/fa';
 
 const Blog = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const blogPosts = [
     {
       title: 'How I Built a Healthcare Dashboard with Power BI',
       description: 'A deep dive into creating interactive healthcare analytics dashboards using Power BI, DAX, and Power Query for real-world impact.',
       tag: 'Power BI',
-      comingSoon: true,
     },
     {
-      title: 'ETL Pipelines with Python & MySQL — A Beginner\'s Guide',
+      title: "ETL Pipelines with Python & MySQL - A Beginner's Guide",
       description: 'Learn how to build efficient ETL pipelines using Python libraries and MySQL for data transformation and loading workflows.',
       tag: 'Data Engineering',
-      comingSoon: true,
     },
     {
       title: 'AI Automation Tools Every Data Analyst Should Know',
       description: 'Exploring modern AI tools like ChatGPT, Claude, n8n, and Cursor that enhance data analysis workflows and boost productivity.',
       tag: 'AI & Automation',
-      comingSoon: true,
     },
   ];
 
   return (
-    <section className="py-20 relative bg-gradient-to-b from-[#0d1117] to-transparent">
+    <section className="py-20" data-testid="blog-section">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
         >
-          {/* Section Title */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
-              Blog & Articles
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto mb-4"></div>
-            <p className="text-gray-400 text-lg">Sharing insights and learnings from my data journey</p>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-syne font-bold text-slate-900 mb-3">Blog & Articles</h2>
+            <div className="section-line mx-auto mb-4"></div>
+            <p className="text-slate-500 text-base">Sharing insights and learnings from my data journey</p>
           </div>
 
-          {/* Blog Grid */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {blogPosts.map((post, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                className="glass-strong p-6 rounded-2xl hover:neon-glow-purple transition-all duration-300 relative overflow-hidden group"
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="glass-card glass-card-hover p-6 rounded-2xl transition-all duration-300 group relative overflow-hidden"
+                data-testid={`blog-card-${index}`}
               >
-                {/* Coming Soon Badge */}
-                {post.comingSoon && (
-                  <div className="absolute top-4 right-4 bg-neon-purple/20 text-neon-purple px-3 py-1 rounded-full text-xs font-semibold border border-neon-purple/50">
-                    Coming Soon
-                  </div>
-                )}
-
-                {/* Tag */}
-                <div className="glass px-3 py-1 rounded-full text-xs font-semibold text-neon-blue inline-block mb-4">
-                  {post.tag}
+                <div className="absolute top-4 right-4 bg-brand-teal/10 text-brand-teal px-3 py-0.5 rounded-full text-xs font-semibold">
+                  Coming Soon
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gradient transition-all">
+                <span className="inline-block bg-brand-blue/10 text-brand-blue px-3 py-0.5 rounded-full text-xs font-semibold mb-4">
+                  {post.tag}
+                </span>
+
+                <h3 className="text-base font-syne font-bold text-slate-800 mb-2 group-hover:text-brand-blue transition-colors">
                   {post.title}
                 </h3>
+                <p className="text-slate-500 text-sm mb-4 leading-relaxed">{post.description}</p>
 
-                {/* Description */}
-                <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-                  {post.description}
-                </p>
-
-                {/* Read More Link */}
-                <div className="flex items-center gap-2 text-neon-blue group-hover:text-neon-purple transition-colors cursor-pointer">
-                  <span className="text-sm font-semibold">Read More</span>
-                  <FaArrowRight className="group-hover:translate-x-2 transition-transform" />
+                <div className="flex items-center gap-1.5 text-brand-blue text-sm font-medium cursor-pointer">
+                  <span>Read More</span>
+                  <FaArrowRight className="text-xs group-hover:translate-x-1 transition-transform" />
                 </div>
 
-                {/* Decorative Gradient */}
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-neon-blue to-neon-purple transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-blue to-brand-teal scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </motion.div>
             ))}
           </div>
