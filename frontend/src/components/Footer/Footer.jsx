@@ -12,60 +12,45 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative py-12 bg-gradient-to-t from-[#0d1117] to-transparent border-t border-gray-800">
+    <footer className="py-10 border-t border-slate-200 bg-white/40" data-testid="footer">
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center space-y-6">
-          {/* Name & Tagline */}
+        <div className="text-center space-y-5">
           <div>
-            <h3 className="text-3xl font-bold text-gradient mb-2">Gagan A J</h3>
-            <p className="text-gray-400">Data Analyst | Business Intelligence | AI Tools Explorer</p>
+            <h3 className="text-2xl font-syne font-bold text-accent mb-1">Gagan A J</h3>
+            <p className="text-slate-500 text-sm">Data Analyst | Business Intelligence | AI Tools Explorer</p>
           </div>
 
-          {/* Social Links */}
-          <div className="flex justify-center gap-6">
-            {socialLinks.map((social, index) => (
+          <div className="flex justify-center gap-5">
+            {socialLinks.map((social, i) => (
               <a
-                key={index}
+                key={i}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-neon-blue text-2xl transition-all duration-300 hover:scale-110"
+                className="text-slate-400 hover:text-brand-blue text-xl transition-colors duration-200"
                 title={social.label}
                 aria-label={social.label}
+                data-testid={`footer-social-${social.label.toLowerCase()}`}
               >
                 {social.icon}
               </a>
             ))}
           </div>
 
-          {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <a href="#home" className="text-gray-400 hover:text-neon-blue transition-colors">
-              Home
-            </a>
-            <a href="#about" className="text-gray-400 hover:text-neon-blue transition-colors">
-              About
-            </a>
-            <a href="#skills" className="text-gray-400 hover:text-neon-blue transition-colors">
-              Skills
-            </a>
-            <a href="#projects" className="text-gray-400 hover:text-neon-blue transition-colors">
-              Projects
-            </a>
-            <a href="#contact" className="text-gray-400 hover:text-neon-blue transition-colors">
-              Contact
-            </a>
+          <div className="flex flex-wrap justify-center gap-5 text-sm">
+            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((link) => (
+              <a key={link} href={`#${link.toLowerCase()}`} className="text-slate-400 hover:text-brand-blue transition-colors">
+                {link}
+              </a>
+            ))}
           </div>
 
-          {/* Divider */}
-          <div className="w-full max-w-md mx-auto h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
+          <div className="w-full max-w-xs mx-auto h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
 
-          {/* Copyright */}
-          <div className="text-gray-500 text-sm">
-            <p className="flex items-center justify-center gap-2">
-              © {currentYear} Gagan A J. Made with <FaHeart className="text-red-500 animate-pulse" /> and data.
+          <div className="text-slate-400 text-xs">
+            <p className="flex items-center justify-center gap-1.5">
+              &copy; {currentYear} Gagan A J. Made with <FaHeart className="text-red-400" /> and data.
             </p>
-            <p className="mt-2">All rights reserved.</p>
           </div>
         </div>
       </div>
