@@ -1,96 +1,54 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaPython, FaDatabase, FaChartBar, FaCloud, FaComments, FaFileExcel, FaAws } from 'react-icons/fa';
-import { SiMysql, SiPostgresql } from 'react-icons/si';
+import { FaPython, FaDatabase, FaChartBar, FaCloud, FaComments, FaFileExcel } from 'react-icons/fa';
 
 const Skills = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const skillCategories = [
-    {
-      title: 'Programming',
-      icon: <FaPython />,
-      skills: ['Python (Pandas, NumPy, Matplotlib)', 'SQL'],
-    },
-    {
-      title: 'Visualization',
-      icon: <FaChartBar />,
-      skills: ['Power BI', 'Matplotlib'],
-    },
-    {
-      title: 'Databases',
-      icon: <FaDatabase />,
-      skills: ['PostgreSQL', 'MySQL'],
-    },
-    {
-      title: 'Data Tools',
-      icon: <FaFileExcel />,
-      skills: ['Excel', 'Power Query', 'Power Pivot', 'DAX'],
-    },
-    {
-      title: 'Cloud (Basics)',
-      icon: <FaCloud />,
-      skills: ['AWS', 'Azure', 'GCP'],
-    },
-    {
-      title: 'Core Skills',
-      icon: <FaChartBar />,
-      skills: ['ETL Processes', 'KPI Tracking', 'Data Cleaning & Validation', 'Database Management'],
-    },
-    {
-      title: 'Soft Skills',
-      icon: <FaComments />,
-      skills: ['Strategic Thinking', 'Effective Communication'],
-    },
+    { title: 'Programming', icon: <FaPython />, skills: ['Python (Pandas, NumPy, Matplotlib)', 'SQL'] },
+    { title: 'Visualization', icon: <FaChartBar />, skills: ['Power BI', 'Matplotlib'] },
+    { title: 'Databases', icon: <FaDatabase />, skills: ['PostgreSQL', 'MySQL'] },
+    { title: 'Data Tools', icon: <FaFileExcel />, skills: ['Excel', 'Power Query', 'Power Pivot', 'DAX'] },
+    { title: 'Cloud (Basics)', icon: <FaCloud />, skills: ['AWS', 'Azure', 'GCP'] },
+    { title: 'Core Skills', icon: <FaChartBar />, skills: ['ETL Processes', 'KPI Tracking', 'Data Cleaning & Validation', 'Database Management'] },
+    { title: 'Soft Skills', icon: <FaComments />, skills: ['Strategic Thinking', 'Effective Communication'] },
   ];
 
   return (
-    <section id="skills" className="py-20 relative" data-testid="skills-section">
+    <section id="skills" className="py-20" data-testid="skills-section">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
         >
-          {/* Section Title */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
-              Skills & Expertise
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto"></div>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-syne font-bold text-slate-900 mb-3">Skills & Expertise</h2>
+            <div className="section-line mx-auto"></div>
           </div>
 
-          {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {skillCategories.map((category, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-strong p-6 rounded-2xl hover:neon-glow-purple transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="glass-card glass-card-hover p-6 rounded-2xl transition-all duration-300"
+                data-testid={`skill-card-${index}`}
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="text-3xl text-neon-blue">
-                    {category.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{category.title}</h3>
+                  <div className="text-2xl text-brand-blue">{category.icon}</div>
+                  <h3 className="text-lg font-syne font-bold text-slate-800">{category.title}</h3>
                 </div>
-
                 <div className="space-y-2">
-                  {category.skills.map((skill, skillIndex) => (
-                    <motion.div
-                      key={skillIndex}
-                      whileHover={{ x: 5 }}
-                      className="glass p-3 rounded-lg text-gray-300 text-sm"
-                    >
+                  {category.skills.map((skill, i) => (
+                    <div key={i} className="bg-slate-50/80 px-3 py-2 rounded-lg text-slate-600 text-sm border border-slate-100">
                       {skill}
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </motion.div>

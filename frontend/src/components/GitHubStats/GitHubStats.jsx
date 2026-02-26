@@ -4,107 +4,74 @@ import { useInView } from 'react-intersection-observer';
 import { FaGithub } from 'react-icons/fa';
 
 const GitHubStats = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const username = 'GaganAJ-45';
 
+  const cards = [
+    {
+      src: `https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=default&hide_border=true&bg_color=ffffff00&title_color=2563eb&icon_color=0d9488&text_color=475569&cache_seconds=86400`,
+      alt: 'GitHub Stats',
+    },
+    {
+      src: `https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=default&hide_border=true&bg_color=ffffff00&title_color=2563eb&text_color=475569&cache_seconds=86400`,
+      alt: 'Top Languages',
+    },
+    {
+      src: `https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=default&hide_border=true&background=ffffff00&ring=2563eb&fire=0d9488&currStreakLabel=2563eb&sideLabels=475569&dates=94a3b8&cache_seconds=86400`,
+      alt: 'GitHub Streak',
+    },
+  ];
+
   return (
-    <section className="py-20 relative">
+    <section className="py-20" data-testid="github-stats-section">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
         >
-          {/* Section Title */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
-              GitHub Statistics
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto"></div>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-syne font-bold text-slate-900 mb-3">GitHub Statistics</h2>
+            <div className="section-line mx-auto"></div>
           </div>
 
-          {/* GitHub Stats Cards */}
-          <div className="grid lg:grid-cols-3 gap-6 mb-8">
-            {/* Stats Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="glass-strong p-4 rounded-2xl hover:neon-glow-blue transition-all duration-300"
-            >
-              <img
-                src={`https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bfff&icon_color=7c3aed&text_color=ffffff&cache_seconds=86400`}
-                alt="GitHub Stats"
-                className="w-full h-auto rounded-lg"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="text-center text-gray-400 py-8">Stats temporarily unavailable</div>';
-                }}
-              />
-            </motion.div>
-
-            {/* Top Languages Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="glass-strong p-4 rounded-2xl hover:neon-glow-purple transition-all duration-300"
-            >
-              <img
-                src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${username}&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117&title_color=00bfff&text_color=ffffff&cache_seconds=86400`}
-                alt="Top Languages"
-                className="w-full h-auto rounded-lg"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="text-center text-gray-400 py-8">Stats temporarily unavailable</div>';
-                }}
-              />
-            </motion.div>
-
-            {/* Streak Stats Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="glass-strong p-4 rounded-2xl hover:neon-glow-blue transition-all duration-300"
-            >
-              <img
-                src={`https://github-readme-streak-stats.herokuapp.com/?user=${username}&theme=tokyonight&hide_border=true&background=0d1117&ring=00bfff&fire=7c3aed&currStreakLabel=00bfff&cache_seconds=86400`}
-                alt="GitHub Streak"
-                className="w-full h-auto rounded-lg"
-                loading="lazy"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  e.target.parentElement.innerHTML = '<div class="text-center text-gray-400 py-8">Stats temporarily unavailable</div>';
-                }}
-              />
-            </motion.div>
+          <div className="grid lg:grid-cols-3 gap-5 mb-8">
+            {cards.map((card, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="glass-card glass-card-hover p-4 rounded-2xl transition-all duration-300"
+                data-testid={`github-card-${i}`}
+              >
+                <img
+                  src={card.src}
+                  alt={card.alt}
+                  className="w-full h-auto rounded-lg"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    if (e.target.nextSibling) e.target.nextSibling.style.display = 'block';
+                  }}
+                />
+                <p className="text-center text-slate-400 py-6 text-sm hidden">Stats temporarily unavailable</p>
+              </motion.div>
+            ))}
           </div>
 
-          {/* View GitHub Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-center"
-          >
+          <div className="text-center">
             <a
               href={`https://github.com/${username}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 btn-primary neon-glow-blue"
+              className="btn-primary"
+              data-testid="view-github-button"
             >
-              <FaGithub className="text-2xl" />
-              View My GitHub
+              <FaGithub className="text-xl" /> View My GitHub
             </a>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
