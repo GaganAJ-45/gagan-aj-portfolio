@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaInstagram, FaFacebook, FaDownload } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaGithub, FaLinkedin, FaInstagram, FaFacebook, FaDownload, FaBars, FaTimes } from 'react-icons/fa';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -23,119 +21,120 @@ const Navbar = () => {
   ];
 
   const socialLinks = [
-    { icon: <FaGithub />, href: 'https://github.com/GaganAJ-45' },
-    { icon: <FaLinkedin />, href: 'https://www.linkedin.com/in/gagan-a-j' },
-    { icon: <FaInstagram />, href: 'https://www.instagram.com/gagan__aj' },
-    { icon: <FaFacebook />, href: 'https://www.facebook.com/gagan.aj.900' },
+    { icon: <FaGithub />, href: 'https://github.com/GaganAJ-45', label: 'GitHub' },
+    { icon: <FaLinkedin />, href: 'https://www.linkedin.com/in/gagan-a-j', label: 'LinkedIn' },
+    { icon: <FaInstagram />, href: 'https://www.instagram.com/gagan__aj', label: 'Instagram' },
+    { icon: <FaFacebook />, href: 'https://www.facebook.com/gagan.aj.900', label: 'Facebook' },
   ];
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass-strong py-4' : 'py-6'
+        scrolled ? 'glass-card py-3 shadow-sm' : 'py-5 bg-transparent'
       }`}
+      data-testid="navbar"
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <motion.a
-            href="#home"
-            className="text-2xl font-bold text-gradient"
-            whileHover={{ scale: 1.05 }}
-          >
+          <a href="#home" className="text-2xl font-syne font-800 text-accent" data-testid="nav-logo">
             Gagan A J
-          </motion.a>
+          </a>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-300 hover:text-neon-blue transition-colors duration-300"
+                className="text-slate-600 hover:text-brand-blue transition-colors duration-200 font-medium text-sm"
+                data-testid={`nav-link-${link.name.toLowerCase()}`}
               >
                 {link.name}
               </a>
             ))}
           </div>
 
-          {/* Social Icons & Download CV */}
-          <div className="hidden md:flex items-center gap-4">
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={index}
+          {/* Social + Download */}
+          <div className="hidden md:flex items-center gap-3">
+            {socialLinks.map((social, i) => (
+              <a
+                key={i}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.2, rotate: 5 }}
-                className="text-gray-300 hover:text-neon-blue text-xl transition-colors duration-300"
+                className="text-slate-500 hover:text-brand-blue text-lg transition-colors duration-200"
+                aria-label={social.label}
+                data-testid={`nav-social-${social.label.toLowerCase()}`}
               >
                 {social.icon}
-              </motion.a>
+              </a>
             ))}
-            <motion.a
+            <a
               href="/assets/Gagan_CV.pdf"
               download
-              whileHover={{ scale: 1.05 }}
-              className="ml-4 btn-primary flex items-center gap-2 neon-glow-blue"
+              className="ml-3 btn-primary text-sm py-2 px-5"
+              data-testid="nav-download-cv"
             >
-              <FaDownload /> Download CV
-            </motion.a>
+              <FaDownload /> CV
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white text-2xl"
+            className="md:hidden text-slate-700 text-xl p-2"
+            data-testid="nav-mobile-toggle"
+            aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? '✕' : '☰'}
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden mt-4 glass-strong rounded-lg p-4"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 text-gray-300 hover:text-neon-blue transition-colors"
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="flex gap-4 mt-4 pt-4 border-t border-gray-700">
-              {socialLinks.map((social, index) => (
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden mt-4 glass-card rounded-2xl p-5 overflow-hidden"
+            >
+              {navLinks.map((link) => (
                 <a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-300 hover:text-neon-blue text-xl"
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2.5 text-slate-600 hover:text-brand-blue transition-colors font-medium"
                 >
-                  {social.icon}
+                  {link.name}
                 </a>
               ))}
-            </div>
-            <a
-              href="/assets/Gagan_CV.pdf"
-              download
-              className="mt-4 btn-primary flex items-center justify-center gap-2 w-full"
-            >
-              <FaDownload /> Download CV
-            </a>
-          </motion.div>
-        )}
+              <div className="flex gap-4 mt-4 pt-4 border-t border-slate-200">
+                {socialLinks.map((social, i) => (
+                  <a
+                    key={i}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-500 hover:text-brand-blue text-lg"
+                    aria-label={social.label}
+                  >
+                    {social.icon}
+                  </a>
+                ))}
+              </div>
+              <a
+                href="/assets/Gagan_CV.pdf"
+                download
+                className="mt-4 btn-primary text-sm w-full justify-center"
+              >
+                <FaDownload /> Download CV
+              </a>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </motion.nav>
+    </nav>
   );
 };
 

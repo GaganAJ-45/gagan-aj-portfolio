@@ -11,28 +11,40 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative pt-20"
+      className="min-h-screen flex items-center relative pt-24 pb-12"
       data-testid="hero-section"
     >
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Text Content */}
+          {/* Left - Text */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7 }}
             className="space-y-6"
           >
+            <motion.p
+              className="text-brand-blue font-semibold tracking-wide uppercase text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.1 }}
+            >
+              Welcome to my portfolio
+            </motion.p>
+
             <motion.h1
-              className="text-5xl md:text-7xl font-bold text-white leading-tight"
+              className="font-syne font-extrabold text-slate-900 leading-[1.1]"
+              style={{ fontSize: 'clamp(2.8rem, 5.6vw, 5.6rem)', fontWeight: 800 }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              data-testid="hero-heading"
             >
-              Hi, I'm <span className="text-gradient">Gagan A J</span>
+              Hi, I'm{' '}
+              <span className="text-accent">Gagan A J</span>
             </motion.h1>
 
-            <div className="text-2xl md:text-3xl text-gray-300 h-20">
+            <div className="text-xl md:text-2xl text-slate-500 font-medium h-12" data-testid="hero-typewriter">
               <Typewriter
                 options={{
                   strings: [
@@ -50,7 +62,7 @@ const Hero = () => {
             </div>
 
             <motion.p
-              className="text-lg text-gray-400 max-w-xl"
+              className="text-base text-slate-500 max-w-lg leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -59,14 +71,14 @@ const Hero = () => {
             </motion.p>
 
             <motion.div
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-4 pt-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.5 }}
             >
               <button
                 onClick={scrollToProjects}
-                className="btn-primary neon-glow-blue flex items-center gap-2"
+                className="btn-primary"
                 data-testid="view-work-button"
               >
                 View My Work <FaArrowDown />
@@ -74,7 +86,7 @@ const Hero = () => {
               <a
                 href="/assets/Gagan_CV.pdf"
                 download
-                className="btn-secondary flex items-center gap-2"
+                className="btn-outline"
                 data-testid="download-resume-button"
               >
                 <FaDownload /> Download Resume
@@ -82,46 +94,28 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Side - Photo with Spotlight Effect */}
+          {/* Right - Photo */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="relative flex justify-center lg:justify-end"
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="flex justify-center lg:justify-end"
           >
-            <div className="spotlight relative">
-              <motion.div
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="relative z-10"
-              >
-                <div className="glass-strong p-4 rounded-3xl neon-glow-purple">
-                  <img
-                    src="/assets/gagan.jpeg"
-                    alt="Gagan A J - Data Analyst"
-                    className="rounded-2xl w-full max-w-md h-auto object-cover shadow-2xl"
-                  />
-                </div>
-              </motion.div>
-
-              {/* Decorative elements */}
-              <div className="absolute top-10 -left-10 w-32 h-32 bg-neon-blue opacity-20 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-10 -right-10 w-40 h-40 bg-neon-purple opacity-20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="relative">
+              <div className="glass-card p-3 rounded-3xl" data-testid="hero-photo">
+                <img
+                  src="/assets/gagan.jpeg"
+                  alt="Gagan A J - Data Analyst"
+                  className="rounded-2xl w-full max-w-sm h-auto object-cover"
+                />
+              </div>
+              {/* Soft decorative blobs */}
+              <div className="absolute -top-6 -left-6 w-28 h-28 bg-brand-blue/10 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-teal/10 rounded-full blur-2xl"></div>
             </div>
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
-      >
-        <div className="w-6 h-10 border-2 border-neon-blue rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-neon-blue rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </motion.div>
     </section>
   );
 };

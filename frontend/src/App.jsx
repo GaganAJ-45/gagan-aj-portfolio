@@ -13,12 +13,10 @@ import Blog from './components/Blog/Blog';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import WhatsAppButton from './components/WhatsAppButton/WhatsAppButton';
-import ParticleBackground from './components/ParticleBackground/ParticleBackground';
 
 function App() {
   return (
-    <div className="relative min-h-screen bg-[#0a0a0a] text-white">
-      <ParticleBackground />
+    <div className="relative min-h-screen bg-brand-bg text-slate-800 font-inter">
       <Navbar />
       <main>
         <Hero />

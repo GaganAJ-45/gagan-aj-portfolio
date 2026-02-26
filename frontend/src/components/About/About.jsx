@@ -3,85 +3,67 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const About = () => {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
   return (
-    <section id="about" className="py-20 relative" data-testid="about-section">
+    <section id="about" className="py-20" data-testid="about-section">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
           ref={ref}
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
         >
-          {/* Section Title */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-4">
-              About Me
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-neon-blue to-neon-purple mx-auto"></div>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-syne font-bold text-slate-900 mb-3">About Me</h2>
+            <div className="section-line mx-auto"></div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Photo */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -40 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative flex justify-center"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex justify-center"
             >
-              <div className="glass-strong p-4 rounded-3xl neon-glow-blue">
+              <div className="glass-card p-3 rounded-3xl">
                 <img
                   src="/assets/gagan_ph.jpg"
                   alt="Gagan A J - Professional Photo"
-                  className="rounded-2xl w-full max-w-md h-auto object-cover shadow-2xl"
+                  className="rounded-2xl w-full max-w-md h-auto object-cover"
                 />
               </div>
-
-              {/* Decorative elements */}
-              <div className="absolute -top-6 -right-6 w-32 h-32 border-4 border-neon-purple rounded-3xl opacity-50"></div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 border-4 border-neon-blue rounded-3xl opacity-50"></div>
             </motion.div>
 
-            {/* Bio Text */}
+            {/* Bio */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 40 }}
               animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="space-y-6"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="space-y-5"
             >
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I'm <span className="text-neon-blue font-semibold">Gagan A J</span>, a Data Analyst aspirant with a strong foundation in Python, SQL, and Power BI, and a background in Electronics & Communication Engineering.
+              <p className="text-base text-slate-600 leading-relaxed">
+                I'm <span className="text-brand-blue font-semibold">Gagan A J</span>, a Data Analyst aspirant with a strong foundation in Python, SQL, and Power BI, and a background in Electronics & Communication Engineering.
+              </p>
+              <p className="text-base text-slate-600 leading-relaxed">
+                I specialize in transforming raw data into meaningful insights through <span className="text-brand-teal font-semibold">ETL pipelines</span>, <span className="text-brand-teal font-semibold">interactive dashboards</span>, and <span className="text-brand-teal font-semibold">KPI-driven analysis</span>.
+              </p>
+              <p className="text-base text-slate-600 leading-relaxed">
+                Alongside data analytics, I've started exploring <span className="text-brand-blue font-semibold">AI automation</span> and modern AI tools to enhance workflows and improve productivity.
+              </p>
+              <p className="text-base text-slate-600 leading-relaxed">
+                I've worked on projects across sales analytics, healthcare data, and student performance analysis, focusing on clarity, accuracy, and real-world business impact.
               </p>
 
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I specialize in transforming raw data into meaningful insights through <span className="text-neon-purple font-semibold">ETL pipelines</span>, <span className="text-neon-purple font-semibold">interactive dashboards</span>, and <span className="text-neon-purple font-semibold">KPI-driven analysis</span>.
-              </p>
-
-              <p className="text-lg text-gray-300 leading-relaxed">
-                Alongside data analytics, I've started exploring <span className="text-neon-blue font-semibold">AI automation</span> and modern AI tools to enhance workflows, automate analysis tasks, and improve productivity.
-              </p>
-
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I've worked on projects across <span className="font-semibold">sales analytics</span>, <span className="font-semibold">healthcare data</span>, and <span className="font-semibold">student performance analysis</span>, focusing on clarity, accuracy, and real-world business impact.
-              </p>
-
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I'm continuously learning cloud platforms, AI-assisted analytics, and automation techniques to build smarter, scalable, data-driven solutions.
-              </p>
-
-              {/* Contact Info Highlights */}
-              <div className="grid grid-cols-2 gap-4 pt-6">
-                <div className="glass p-4 rounded-lg">
-                  <p className="text-sm text-gray-400">Location</p>
-                  <p className="text-lg font-semibold text-white">Karnataka, India</p>
+              <div className="grid grid-cols-2 gap-4 pt-4">
+                <div className="glass-card p-4 rounded-xl">
+                  <p className="text-xs text-slate-400 uppercase tracking-wide">Location</p>
+                  <p className="text-sm font-semibold text-slate-800 mt-1">Karnataka, India</p>
                 </div>
-                <div className="glass p-4 rounded-lg">
-                  <p className="text-sm text-gray-400">Email</p>
-                  <p className="text-lg font-semibold text-white break-all">gaganaj45@gmail.com</p>
+                <div className="glass-card p-4 rounded-xl">
+                  <p className="text-xs text-slate-400 uppercase tracking-wide">Email</p>
+                  <p className="text-sm font-semibold text-slate-800 mt-1 break-all">gaganaj45@gmail.com</p>
                 </div>
               </div>
             </motion.div>
