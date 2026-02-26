@@ -9,5 +9,12 @@ export default defineConfig({
     strictPort: true,
     allowedHosts: true,
     hmr: false,
+    watch: {
+      usePolling: false,
+      ignored: ['**/node_modules/**', '**/.git/**'],
+    },
+  },
+  build: {
+    sourcemap: false,
   },
 });
